@@ -39,11 +39,11 @@ def autoroi(img):
 
 
 def prediction():
-    list_of_files = glob.glob('data/test/*')
-    latest_file = max(list_of_files, key=os.path.getctime) # error line
+    list_of_files = glob.glob('./cell_images/cell_images/Parasitized/')
+    latest_file = max(list_of_files, key=os.path.getctime)
     img = cv2.imread(latest_file)
     img = autoroi(img)
-    img = cv2.resize(img, (256, 256))
+    img = cv2.resize(img, (256, 256)) #error line, 3/17 11 AM
     img = np.reshape(img, [1, 256, 256, 3])
 
     prob = model.predict(img)
