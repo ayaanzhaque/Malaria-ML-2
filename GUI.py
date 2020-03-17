@@ -57,4 +57,4 @@ Class = prediction()
 if (Class == 1):
     print("Congratulations! You are healthy!")
 else:
-    print("Unfortunately, you have been diagnosed with glaucoma.")
+    print("Unfortunately, you have been diagnosed with Malaria.")
