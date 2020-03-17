@@ -1,6 +1,6 @@
 from Tkinter import *
 import tkMessageBox as messagebox
-from keras.models import load_model
+from tensorflow.keras.models import load_model
 import matplotlib.pyplot as plt
 import cv2
 import numpy as np
@@ -8,8 +8,9 @@ import os
 import pandas
 import h5py
 import glob
+from keras.initializers import glorot_uniform
 
-h5file =  "basic_cnn.h5"
+h5file =  "weights.h5"
 
 with h5py.File(h5file,'r') as fid:
      model = load_model(fid)
