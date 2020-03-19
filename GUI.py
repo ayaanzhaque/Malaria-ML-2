@@ -40,7 +40,7 @@ def autoroi(img):
 
 
 def prediction():
-    list_of_files = glob.glob('./cell_images/cell_images/Uninfected/*')
+    list_of_files = glob.glob('./cell_images/cell_images/Parasitized/*')
     latest_file = max(list_of_files, key=os.path.getctime)
     img = cv2.imread(latest_file)
     img = autoroi(img)
@@ -48,17 +48,17 @@ def prediction():
     img = np.reshape(img, [1, 125, 125, 3])
     img = tf.cast(img, tf.float64)
 
-    prob = model.predict(img)
-    Class = prob.argmax(axis=1)
-    print(prob)
+    prediction = model.predict(img)
+    # Class = prob.argmax(axis=1) # why was this here lmao
+    print(prediction)
 
 
-    return(Class)
+    return(prediction)
 
 
-Class = prediction()
-print("Class = ", Class)
-if (Class == 1):
+finalPrediction = prediction()
+print("Final Prediction = ", finalPrediction)
+if (finalPrediction == 0):
     print("Congratulations! You are healthy!")
 else:
     print("Unfortunately, you have been diagnosed with Malaria.")
