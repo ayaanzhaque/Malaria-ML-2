@@ -1,5 +1,6 @@
 from Tkinter import *
 import tkMessageBox as messagebox
+import tensorflow as tf
 from tensorflow.keras.models import load_model
 import matplotlib.pyplot as plt
 import cv2
@@ -39,21 +40,24 @@ def autoroi(img):
 
 
 def prediction():
-    list_of_files = glob.glob('./cell_images/cell_images/Parasitized/')
+    list_of_files = glob.glob('./cell_images/cell_images/Uninfected/*')
     latest_file = max(list_of_files, key=os.path.getctime)
     img = cv2.imread(latest_file)
     img = autoroi(img)
-    img = cv2.resize(img, (256, 256)) #error line, 3/17 11 AM
-    img = np.reshape(img, [1, 256, 256, 3])
+    img = cv2.resize(img, (125, 125))
+    img = np.reshape(img, [1, 125, 125, 3])
+    img = tf.cast(img, tf.float64)
 
     prob = model.predict(img)
-    Class = prob.argmax(axis=-1)
+    Class = prob.argmax(axis=1)
     print(prob)
+
 
     return(Class)
 
 
 Class = prediction()
+print("Class = ", Class)
 if (Class == 1):
     print("Congratulations! You are healthy!")
 else:
