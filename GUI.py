@@ -11,7 +11,7 @@ import h5py
 import glob
 from keras.initializers import glorot_uniform
 
-h5file =  "weights.h5"
+h5file =  "finalPrunedWeights.h5"
 
 with h5py.File(h5file,'r') as fid:
      model = load_model(fid)
@@ -58,7 +58,7 @@ def prediction():
 
 finalPrediction = prediction()
 print("Final Prediction = ", finalPrediction)
-if (finalPrediction == 0):
+if (finalPrediction < 0.5):
     print("Congratulations! You are healthy!")
 else:
     print("Unfortunately, you have been diagnosed with Malaria.")
