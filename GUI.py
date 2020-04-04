@@ -40,7 +40,7 @@ def autoroi(img):
 
 
 def prediction():
-    list_of_files = glob.glob('./cell_images/cell_images/Parasitized/*')
+    list_of_files = glob.glob('./cell_images/cell_images/Uninfected/*')
     latest_file = max(list_of_files, key=os.path.getctime)
     img = cv2.imread(latest_file)
     img = autoroi(img)
