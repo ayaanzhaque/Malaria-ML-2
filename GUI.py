@@ -11,7 +11,7 @@ import h5py
 import glob
 from keras.initializers import glorot_uniform
 
-h5file =  "finalPrunedWeights.h5"
+h5file =  "vggFineTunedWeights.h5"
 
 with h5py.File(h5file,'r') as fid:
      model = load_model(fid)
@@ -43,6 +43,7 @@ def prediction():
     list_of_files = glob.glob('./cell_images/cell_images/Uninfected/*')
     latest_file = max(list_of_files, key=os.path.getctime)
     img = cv2.imread(latest_file)
+    # img = cv2.imread("./cell_images/cell_images/Uninfected/C1_thinF_IMG_20150604_104722_cell_60.png")
     img = autoroi(img)
     img = cv2.resize(img, (125, 125))
     img = np.reshape(img, [1, 125, 125, 3])
@@ -57,6 +58,7 @@ def prediction():
 
 
 finalPrediction = prediction()
+print(finalPrediction[0])
 print("Final Prediction = ", finalPrediction)
 if (finalPrediction < 0.5):
     print("Congratulations! You are healthy!")
